@@ -1,0 +1,11 @@
+REM calculates the modulo 
+REM takes user input twice and divides them
+IN r0 
+IN r1
+MOV r2 r0 
+DIV r0 r0 r1
+REM as division is returns an int, do the input minus the result of the multiplication
+MULT r0 r0 r1
+SUB r0 r2 r0
+OUT r0
+END

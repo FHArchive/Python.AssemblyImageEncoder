@@ -1,0 +1,16 @@
+REM outputs the nth fibonacci number
+REM take the user input and decrement by 2
+IN r0 
+DECR r0
+DECR r0
+REM initiate r1 and r2
+MOV r1 1
+MOV r2 1
+REM assign second number to the first and assign sum to the second number
+ADD r3 r1 r2
+MOV r1 r2
+MOV r2 r3
+DECR r0
+BRP 12 r0
+OUT r3
+END

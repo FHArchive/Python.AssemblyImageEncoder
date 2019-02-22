@@ -1,0 +1,6 @@
+REM takes user input twice subtracts them and outputs them 
+IN r0 
+IN r1
+SUB r0 r0 r1
+OUT r0
+END

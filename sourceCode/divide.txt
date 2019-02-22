@@ -1,0 +1,6 @@
+REM takes user input twice and divides them and outputs them 
+IN r0 
+IN r1
+DIV r0 r0 r1
+OUT r0
+END

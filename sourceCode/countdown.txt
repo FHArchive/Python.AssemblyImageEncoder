@@ -1,0 +1,7 @@
+REM counts down from user input to 1
+IN r0 
+OUT r0
+DECR r0
+REM branch while positive to operand 3 (OUT)
+BRP 2 r0
+END
