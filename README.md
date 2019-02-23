@@ -10,7 +10,7 @@ find Steganography interesting to have a play around.
 
 # Language information 
 ## Built for
-This program has been written for Python 3 and has been tested with  
+This program has been written for Python 3 and has been tested with 
 Python version 3.7.0 https://www.python.org/downloads/release/python-370/ 
 on a Windows 10 PC. 
 ## Other versions
