@@ -3,7 +3,7 @@ Encodes a custom set of assembly style instructions into an image.
 Syntax has been inspired by the Little Man Computer (LMC) created by Stuart 
 Madnick in 1965. An online model of this can be found at 
 https://peterhigginson.co.uk/LMC/ and the idea of executing a program from 
-and image from https://github.com/roo2319/Scritch. Note that this is not 
+an image from https://github.com/roo2319/Scritch. Note that this is not 
 the best model of assembly as it has a modest instruction 
 set and lacks a stack. The main purpose of this program is for those who 
 find Steganography interesting to have a play around.
@@ -70,7 +70,7 @@ registers)
 
 ## Registers 
 General considerations:
-- Registers are not bound, though safe ints should be used (-96 to 127)
+- Register contents are not bound, though safe ints should be used (-96 to 127)
 
 |Register |Reserved Value |
 |:-:|:-:|
