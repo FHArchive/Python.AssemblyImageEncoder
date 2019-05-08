@@ -55,7 +55,7 @@ r7 : REGISTER0 + 7
 '''
 
 
-# Read text file and return content as a list of tokens  
+# Read text file and return content as a list of tokens
 def readFileContent(fileName):
     tokens = []
     file = open(fileName, "r")
@@ -65,15 +65,15 @@ def readFileContent(fileName):
         if( line.lstrip()[:3] != "REM"):
             # Split remaining lines into tokens (add these to tokens list)
             tokens.extend(line.split())
-    # Return tokens 
+    # Return tokens
     return tokens
 
-# Read image file in 
+# Read image file in
 def readImg(imageName):
     image = open(imageName, "rb")
     return image
 
-# Write image file out 
+# Write image file out
 def writeImg(imageName):
     image = open(imageName, "wb")
     return image
@@ -85,16 +85,16 @@ def getSize(imageName):
 
 
 
-# Write the assembly code to the image 
+# Write the assembly code to the image
 def writeEncodedImg(inputImgName, outputImgName, tokens):
     # Take the input image and get its size 
     inputImg = readImg(inputImgName)
     inputImgSize = getSize(inputImgName)
     
-    # Create/ overwrite the output image 
+    # Create/ overwrite the output image
     outputImg = writeImg(outputImgName)
     
-    # Copy the header across 
+    # Copy the header across
     outputImg.write(inputImg.read(HEADER_SIZE))
 
     # Get the number of tokens
@@ -105,7 +105,7 @@ def writeEncodedImg(inputImgName, outputImgName, tokens):
         tokenAsByte = generateByteFromToken(tokens[index])
         outputImg.write(tokenAsByte)
           
-    # Copy the footer and the remainder of the image across 
+    # Copy the footer and the remainder of the image across
     outputImg.write(inputImg.read(FOOTER_SIZE + (inputImgSize - numberTokens)))
     return 0
 
@@ -117,7 +117,7 @@ def generateByteFromToken(token):
     registers = ["r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7"]
     isReserved = False
 
-    # Convert an instruction to its reserved int 
+    # Convert an instruction to its reserved int
     for instruction in range (len(instructions)):
         if token == instructions[instruction]:
             integer = COMMAND0 + instruction
@@ -127,7 +127,7 @@ def generateByteFromToken(token):
     for register in range (len(registers)):
         if token == registers[register]:
             integer = REGISTER0 + register
-            isReserved = True 
+            isReserved = True
 
     # Try and convert to an int if the token is not an instruction or register
     if not isReserved:
@@ -136,15 +136,14 @@ def generateByteFromToken(token):
         except:
             print("Error converting token to int: " + token)
 
-    # Convert to a byte and return to the calling program 
-    byte = integer.to_bytes(1, byteorder='big', signed=True)           
+    # Convert to a byte and return to the calling program
+    byte = integer.to_bytes(1, byteorder='big', signed=True)
     return byte
 
 
-def executeFromImage(inputImgName):                    
-    # Take the input image and get its size 
+def executeFromImage(inputImgName):
+    # Take the input image and get its size
     inputImg = readImg(inputImgName)
-    inputImgSize = getSize(inputImgName)
     inputImg.read(HEADER_SIZE)
 
     # Define variables
@@ -159,12 +158,12 @@ def executeFromImage(inputImgName):
                                      signed=True))
                     
     while (not end):
-        # Get the instruction code 
+        # Get the instruction code
         instruction = tokens[tokenNumber]
         tokenNumber += 1
 
         # ADD, SUB, MULT, DIV
-        if (instruction >= COMMAND0 and (instruction < COMMAND0 + 4)): 
+        if (instruction >= COMMAND0 and (instruction < COMMAND0 + 4)):
             outReg = tokens[tokenNumber] - REGISTER0
             tokenNumber += 1
             arg0 = tokens[tokenNumber]
@@ -231,7 +230,7 @@ def executeFromImage(inputImgName):
 
         # END
         if (instruction == COMMAND0 + 9):
-            # Set the end flag to True and terminate 
+            # Set the end flag to True and terminate
             end = True
 
         # BRA
@@ -254,7 +253,7 @@ def executeFromImage(inputImgName):
             # BRZ
             if (instruction == COMMAND0 + 12) and arg0 == 0:
                 tokenNumber = newTokenNumber
-                
+
     return 0
 
 def cli():
@@ -262,15 +261,15 @@ def cli():
           "(C, e, a, q)" )
     choice = input(">")[0].lower()
 
-    # Quit application 
+    # Quit application
     if choice == "q":
-        return True 
+        return True
 
-    # All functions require the path to an image 
+    # All functions require the path to an image
     print("Type in the path to the input image")
     inputImgName = input(">")
 
-    # Code to Image 
+    # Code to Image
     if choice != "e":
         print("Type in the path to the code file")
         codeFile = input(">")
@@ -278,7 +277,7 @@ def cli():
         outputImgName = input(">")
 
     # Run the required function for each choice
-    # EXECUTE IMAGE 
+    # EXECUTE IMAGE
     if choice == "e":
         executeFromImage(inputImgName)
     # CODE TO IMAGE AND EXECUTE
@@ -286,14 +285,14 @@ def cli():
         tokens = readFileContent(codeFile)
         writeEncodedImg(inputImgName, outputImgName, tokens)
         executeFromImage(outputImgName)
-    # DEFAULT = CODE TO IMAGE  
+    # DEFAULT = CODE TO IMAGE
     else:
         tokens = readFileContent(codeFile)
         writeEncodedImg(inputImgName, outputImgName, tokens)
 
 
-# Run the CLI while the user has not finished 
-finished = False 
+# Run the CLI while the user has not finished
+finished = False
 while not finished:
     finished = cli()
 
