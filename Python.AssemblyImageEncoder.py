@@ -87,7 +87,7 @@ def getSize(imageName):
 
 # Write the assembly code to the image
 def writeEncodedImg(inputImgName, outputImgName, tokens):
-    # Take the input image and get its size 
+    # Take the input image and get its size
     inputImg = readImg(inputImgName)
     inputImgSize = getSize(inputImgName)
     
@@ -121,7 +121,7 @@ def generateByteFromToken(token):
     for instruction in range (len(instructions)):
         if token == instructions[instruction]:
             integer = COMMAND0 + instruction
-            isReserved = True 
+            isReserved = True
 
     # Convert a register to its reserved int
     for register in range (len(registers)):
@@ -156,7 +156,7 @@ def executeFromImage(inputImgName):
     for token in range(MAX_CODE_LEN):
         tokens.append(int.from_bytes(inputImg.read(1), byteorder='big',
                                      signed=True))
-                    
+
     while (not end):
         # Get the instruction code
         instruction = tokens[tokenNumber]
