@@ -100,7 +100,7 @@ General considerations:
 registers)
 
 
-|Instruction |Arguements       |Equivalent                                                                                                                                  |Example                                                                                                 |Reserved Value|
+|Instruction |Arguements         |Equivalent                                                                                                                                  |Example                                                                                                 |Reserved Value|
 |:-          |:-                 |:-                                                                                                                                          |:-                                                                                                      |-:            |
 |```REM```   |```N/A```          |```//``` (Java) <br>```#``` (Python)                                                                                                        |```REM This is a comment```                                                                             |N/A           |
 |```ADD```   |```out arg0 arg1```|```out = arg0 + arg1```                                                                                                                     |```ADD r0 2 3``` <br>Register r0 will contain the value 5                                               |-128          |
@@ -123,15 +123,15 @@ General considerations:
 - Register contents are not bound, though safe ints should be used (-96 to 127)
 
 |Register |Reserved Value |
-|:-:|:-: |
-|r0 |-112|
-|r1 |-111|
-|r2 |-110|
-|r3 |-109|
-|r4 |-108|
-|r5 |-107|
-|r6 |-106|
-|r7 |-105|
+|:-:      |:-:            |
+|r0       |-112           |
+|r1       |-111           |
+|r2       |-110           |
+|r3       |-109           |
+|r4       |-108           |
+|r5       |-107           |
+|r6       |-106           |
+|r7       |-105           |
 
 
 ## Licence 

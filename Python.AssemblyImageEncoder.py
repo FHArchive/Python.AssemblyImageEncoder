@@ -90,10 +90,10 @@ def writeEncodedImg(inputImgName, outputImgName, tokens):
     # Take the input image and get its size
     inputImg = readImg(inputImgName)
     inputImgSize = getSize(inputImgName)
-    
+
     # Create/ overwrite the output image
     outputImg = writeImg(outputImgName)
-    
+
     # Copy the header across
     outputImg.write(inputImg.read(HEADER_SIZE))
 
@@ -104,7 +104,7 @@ def writeEncodedImg(inputImgName, outputImgName, tokens):
     for index in range(numberTokens):
         tokenAsByte = generateByteFromToken(tokens[index])
         outputImg.write(tokenAsByte)
-          
+
     # Copy the footer and the remainder of the image across
     outputImg.write(inputImg.read(FOOTER_SIZE + (inputImgSize - numberTokens)))
     return 0
